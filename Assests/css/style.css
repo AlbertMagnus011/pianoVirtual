@@ -8,6 +8,7 @@
     display: flex;
     flex-direction: column;
     justify-self: center;
+    margin-top: 70px;
     background-color: #000; 
     box-shadow: 0 20px 0 #141714;
     border-top-left-radius: 35px;
@@ -60,8 +61,12 @@
     border-bottom-right-radius: 10px;
     border-bottom-left-radius:10px;
     cursor: pointer;
+    padding-bottom:20px ;
 }
-
+.white-key.active{
+    background-color:#ccc;
+    padding-bottom:10px;
+}
 .black-key {
     display: flex;
     flex-direction: column;
@@ -80,4 +85,8 @@
     position: absolute;
     left: 26px;
     z-index: 2;
+}
+.black-key.active{
+    background-color:#000;
+    padding-top:10px;
 }
