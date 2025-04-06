@@ -97,7 +97,7 @@
     color: #000;
     font-size: 22px;
     width: 40px;
-    height: 28vh;
+    height: calc((38vh / 2) + 60px);
     border-bottom-right-radius: 10px;
     border-bottom-left-radius:10px;
     cursor: pointer;
@@ -118,7 +118,7 @@
     color: #fff;
     font-size: 22px;
     width: 28px;
-    height: 14vh;
+    height: calc((20vh / 2) + 20px);
     border-bottom-right-radius: 10px;
     border-bottom-left-radius:10px;
     cursor: pointer;
@@ -135,6 +135,7 @@ footer{
     justify-content: center;
 }
 .footer-content{
+    font-family: 'Courier New', Courier, monospace;
     font-size: 25px;
     margin-top: 15vh;
 }
