@@ -46,15 +46,15 @@ function preloadSounds() {
     const visibleKeys = keyboardAC.slice(0, maxL);
     visibleKeys.forEach(key => {
       if (key.whiteKey) {
-        audioMap[key.whiteKey] = new Audio(`./Assests/sounds/WKey_${key.whiteKey}.wav`);
+        audioMap[key.whiteKey] = new Audio(`./assets/sounds/WKey_${key.whiteKey}.wav`);
       }
       if (key.blackKey) {
         switch (maxL) {
             case 8:
-            key.blackKey == "("?'':audioMap[key.blackKey] = new Audio(`./Assests/sounds/BKey_${key.blackKey}.wav`);
+            key.blackKey == "("?'':audioMap[key.blackKey] = new Audio(`./assets/sounds/BKey_${key.blackKey}.wav`);
                 break;
             default:
-            audioMap[key.blackKey] = new Audio(`./Assests/sounds/BKey_${key.blackKey}.wav`);
+            audioMap[key.blackKey] = new Audio(`./assets/sounds/BKey_${key.blackKey}.wav`);
                 break;
         }
       }
