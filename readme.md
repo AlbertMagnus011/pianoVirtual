@@ -10,7 +10,7 @@ Projeto desenvolvido no curso B7WEB Fullstack para aplicar conhecimentos avança
 <br>
 
 <p align="center">
-  <img alt="projeto Piano Virtual" src="./Assests/templete.png" width="100%">
+  <img alt="projeto Piano Virtual" src="./assets/templete.png" width="100%">
 </p>
 
 ## 🚀 Tecnologias
