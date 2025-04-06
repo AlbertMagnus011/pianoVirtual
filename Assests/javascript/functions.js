@@ -1,4 +1,5 @@
 let maxL = 36;
+let control  = maxL;
 let keys = document.querySelector('.bkeys')
 let sounds = document.querySelector('.sounds');
 let audioMap = {};
@@ -9,33 +10,10 @@ let keyboardAC = [{whiteKey:'1',blackKey:'!'},{whiteKey:'2',blackKey:'@'},{white
     ,{whiteKey:'k'},{whiteKey:'l',blackKey:'L'},{whiteKey:'z',blackKey:'Z'},{whiteKey:'x'},{whiteKey:'c',blackKey:'C'},{whiteKey:'v',blackKey:'V'},{whiteKey:'b',blackKey:'B'}
     ,{whiteKey:'n'},{whiteKey:'m'}];
 
-function update(){
-    verifyResolution();
-}
-
-function genereteKeys(){
-    keys.innerHTML = '';
-    const visibleKeys = keyboardAC.slice(0, maxL);
-    visibleKeys.forEach(key =>{
-            
-        let newKeys = document.createElement('div');
-        newKeys.setAttribute('class','keys');
-        keys.append(newKeys);
-        if(key.whiteKey){
-            let newKeyW = document.createElement('div');
-            newKeyW.setAttribute('class','white-key');
-            newKeyW.setAttribute('data-key',`${key.whiteKey}`);
-            newKeys.append(newKeyW);
-            newKeyW.innerText = key.whiteKey;
-        }
-        if(key.blackKey){
-            let newKeyB = document.createElement('div');
-            newKeyB.setAttribute('class','black-key');
-            newKeyB.setAttribute('data-key',`${key.blackKey}`);
-            newKeys.append(newKeyB);
-            newKeyB.innerText = key.blackKey;
-        }
-    })
+function init() {
+        verifyResolution();
+        genereteKeys();
+        preloadSounds();
 }
     
 function verifyResolution(){
@@ -43,22 +21,25 @@ function verifyResolution(){
         let composerInput = document.querySelector('#composerInput');
         if(resolution >= 1800){
             maxL = 36;
-            composerInput.style.width = '1420px';
+            composerInput.style.width = '1370px';
         }else if(resolution < 1800 && resolution > 1400){
            maxL = 28;
-           composerInput.style.width = '1090px';
+           composerInput.style.width = '1040px';
         }else if(resolution <= 1400 && resolution > 1080){
             maxL = 21;
-            composerInput.style.width = '800px';
+            composerInput.style.width = '750px';
         }else if(resolution <= 1080 && resolution > 700){
             maxL = 14;
-            composerInput.style.width = '490px';
+            composerInput.style.width = '440px';
         }else{
             maxL = 8;
-            composerInput.style.width = '250px';
+            composerInput.style.width = '200px';
         }
+    if(control!=maxL){
         genereteKeys();
         preloadSounds();
+        control=maxL;
+    }
 }
 function preloadSounds() {
     audioMap = {};
@@ -68,16 +49,29 @@ function preloadSounds() {
         audioMap[key.whiteKey] = new Audio(`./Assests/sounds/WKey_${key.whiteKey}.wav`);
       }
       if (key.blackKey) {
-        audioMap[key.blackKey] = new Audio(`./Assests/sounds/BKey_${key.blackKey}.wav`);
+        switch (maxL) {
+            case 8:
+            key.blackKey == "("?'':audioMap[key.blackKey] = new Audio(`./Assests/sounds/BKey_${key.blackKey}.wav`);
+                break;
+            default:
+            audioMap[key.blackKey] = new Audio(`./Assests/sounds/BKey_${key.blackKey}.wav`);
+                break;
+        }
       }
     });
   }
-  
+
+  function clickButton(){
+    let song = document.querySelector('#composerInput').value;
+    if(song !== ''){
+        let songArray = song.split('');
+        playComposition(songArray);
+    }
+  }
+
   function playSound(sound) {
     let originalAudio = audioMap[sound];
     let keyElement = document.querySelector(`div[data-key="${sound}"]`);
-    console.log(sound);
-    console.log(keyElement);
     if (originalAudio) {
       const audioClone = originalAudio.cloneNode();
       audioClone.play();
@@ -89,3 +83,14 @@ function preloadSounds() {
         },300);
     }
   }
+  
+ function playComposition(songArray){
+    let wait = 0;
+    for(let songItem of songArray){
+        setTimeout(()=>{
+            playSound(songItem);
+        }, wait);
+
+        wait +=250;
+    }    
+}
